@@ -21,7 +21,7 @@ the coefficients equal these contrasts exactly ($\beta_i = \delta_i$, $\beta_{ij
 - $I < 0$: **super-additive**, the pair loses more together than the singles predict.
 - $I > 0$: **sub-additive**, the pair loses less.
 
-Each perturbed condition is predicted on several dinucleotide shuffles (10 by default), so p-values describe robustness to correction is applied within each family of tests.
+Each perturbed condition is predicted on several dinucleotide shuffles (10 by default), so p-values describe robustness to sequence alteration.
 
 - Factorial perturbation designs: full power set or a reduced design(baseline, singles, pairs, all-scrambled).
 - Chunked AlphaGenome prediction driver with exponential backoff, so APIthrottling or gRPC errors do not abort a long run.
