@@ -13,10 +13,11 @@ tempCodeRunnerFile.py
 # Reference genome, annotation cache and other large external files.
 data/reference/*
 
-# Figures written by the test scripts.
+# Outputs and unannotated notebooks
 tests/outputs/
 results/figures/*
 results/summaries/*
+notebooks/*_OLD.ipynb
 
 # Secrets
 .alphagenome_api_key
