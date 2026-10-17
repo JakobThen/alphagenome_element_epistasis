@@ -15,7 +15,13 @@ data/reference/*
 
 # Figures written by the test scripts.
 tests/outputs/
+results/figures/*
+results/summaries/*
 
 # Secrets
 .alphagenome_api_key
 *.egg-info/
+
+# Documentation assets
+docs/
+!docs/overview_figure.png

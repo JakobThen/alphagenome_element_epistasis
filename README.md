@@ -4,6 +4,8 @@ A lightweight wrapper around the [AlphaGenome](https://github.com/google-deepmin
 
 The package simulates *in silico* perturbations of user-defined functional elements (for example enhancers) and of attribution-derived motifs (seqlets called from ISM tracks) by replacing them with dinucleotide-shuffled sequence. Perturbation effects are then fitted with a log-link generalised linear model (GLM) to estimate main effects and pairwise epistasis. It also includes diagnostics for ceiling and floor artefacts of the predictor, so that non-additive terms caused by saturated or bounded predictions are not mistaken for regulatory interactions.
 
+![Method overview](docs/overview_figure.png)
+
 ### What it estimates
 
 For a baseline readout $y_0$ (predicted RNA or ATAC) and the readout $y_i$ after scrambling element $i$:
