@@ -1,0 +1,31 @@
+# Python >= 3.11. Install with:  pip install -r env/requirements.txt
+# then make the package importable:  pip install -e .
+#
+# Analysis and plotting
+numpy
+pandas>=2,<3          # alphagenome_research requires <3; code written against 2.x
+scipy
+statsmodels
+matplotlib
+seaborn
+pyarrow
+h5py
+anndata               # ISM score collection (element_epistasis.ism)
+joblib                # parallel ISM processing (src/ism_attribution/run_ism.py)
+
+# Sequence handling, seqlet calling and motif annotation
+torch
+tangermeme
+pyfaidx
+
+# AlphaGenome client (predictions and track metadata)
+alphagenome
+
+# Exon masks for the RNA readout. alphagenome_research is not on PyPI; it pulls
+# in jax. Its pybigwig dependency does not build on Windows, where it can be
+# installed with --no-deps followed by jax, jaxtyping and chex.
+alphagenome_research @ git+https://github.com/google-deepmind/alphagenome_research.git
+
+# Notebooks
+ipykernel
+nbconvert

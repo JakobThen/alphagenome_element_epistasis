@@ -1,0 +1,227 @@
+==============================================================================
+K562 enhancer and TF cooperativity
+generated 2026-10-17 10:25
+alpha=0.05   top_n=10
+==============================================================================
+
+------------------------------------------------------------------------------
+1.  INPUTS SUPPLIED
+------------------------------------------------------------------------------
+  motifs               MISSING
+  controls             MISSING
+  pairs                MISSING
+  coop_atac            MISSING
+  coop_rna             MISSING
+  split                MISSING
+  floor_df             MISSING
+  dose                 MISSING
+  enh_mains                94 rows x  11 cols
+  enh_inters               98 rows x  21 cols
+  atac_inters              98 rows x  10 cols
+  enh_coop                 33 rows x  10 cols
+  single_comp              76 rows x  10 cols
+  pair_comp                63 rows x  16 cols
+  interdependency         290 rows x  13 cols
+  comparison               66 rows x  10 cols
+  cross                MISSING
+  trans_by_gene            33 rows x   4 cols
+  trans_by_locus           94 rows x   4 cols
+  coop_atac_gene           33 rows x  10 cols
+  coop_atac_locus          94 rows x  10 cols
+
+------------------------------------------------------------------------------
+2.  READING THIS DOCUMENT
+------------------------------------------------------------------------------
+  Sign convention: effects are log fold changes against the
+  unperturbed sequence, so scrambling gives a negative value.
+  Interaction I = observed minus additive prediction, therefore
+  I < 0 is SUPER-ADDITIVE and I > 0 is SUB-ADDITIVE.
+  Replicates are dinucleotide shuffles, which are technical,
+  not biological. p-values describe robustness to the shuffle
+  procedure only.
+  TF level uses predicted ATAC unless stated; enhancer level
+  uses predicted RNA at the target gene.
+
+==============================================================================
+3.  TF LEVEL (within enhancer)
+==============================================================================
+
+------------------------------------------------------------------------------
+3.1  TF MOTIF MAIN EFFECTS (delta_i, log scale)
+------------------------------------------------------------------------------
+  [not supplied: motifs]
+
+------------------------------------------------------------------------------
+3.2  TF MOTIF PAIRWISE INTERACTIONS (I, log scale)
+------------------------------------------------------------------------------
+  [not supplied: pairs]
+
+------------------------------------------------------------------------------
+3.3  TF COOPERATIVITY PER ENHANCER
+------------------------------------------------------------------------------
+  [not supplied: coop_atac]
+
+------------------------------------------------------------------------------
+3.4  TF ARTEFACT DIAGNOSTICS
+------------------------------------------------------------------------------
+  saturation, naive (supp E, mathematically coupled):
+    main effects not attached
+
+  saturation, decoupled (supp F):
+    [not supplied: split] - coupling is UNTESTED
+
+  floor check (supp H):
+    [not supplied: floor_df]
+
+  dose response across orders (supp I):
+    [not supplied: dose]
+
+==============================================================================
+4.  ENHANCER LEVEL (GLM, log link)
+==============================================================================
+
+4.1  MAIN EFFECTS (beta_i)
+  terms=94  genes=33
+  beta_i                             n=94    median=-0.031  IQR=[-0.126,-0.006]  range=[-1.471,+0.084]
+  significant                        59 of 94 at FDR<0.05 (0 untested)
+    largest by magnitude (top 10):
+      ALDH1A1_enh2                                 -1.4712  qval=0
+      RHAG_enh2                                    -1.2543  qval=0
+      PIM1_enh6                                    -0.8472  qval=0
+      HHEX_enh3                                    -0.7392  qval=0
+      GALM_enh2                                    -0.4747  qval=0
+      PDLIM1_enh1                                  -0.4411  qval=0
+      FAM178B_enh3                                 -0.3959  qval=0
+      PRKAR2B_enh1                                 -0.3689  qval=2.53e-51
+      DDIT4_enh3                                   -0.3684  qval=6.68e-200
+      PRKAR2B_enh3                                 -0.3435  qval=1.14e-44
+
+4.2  PAIRWISE INTERACTIONS (beta_ij)
+  pairs=98  genes=33
+  beta_ij                            n=98    median=-0.001  IQR=[-0.008,+0.000]  range=[-0.209,+0.036]
+  direction                          super-additive(<0)=72  sub-additive(>0)=26  |  significant: 16 super, 2 sub
+  significant pairs                  18 of 98 at FDR<0.05 (0 untested)
+  distance vs beta_ij                n=93    r=-0.076 p=0.4720     rho=-0.235 p=0.0234
+  distance (bp)                      n=93    median=+19620.000  IQR=[+7740.000,+28420.000]  range=[+360.000,+292500.000]
+  saturation (additive)              n=98    r=+0.402 p=4.1e-05    rho=+0.521 p=3.8e-08
+  saturation (baseline)              n=98    r=-0.032 p=0.7510     rho=-0.219 p=0.0304
+
+  extreme pairs:
+    most negative (showing 10 of 72):
+      MGAT1 / enh2:enh2-3                          -0.2093  qval=3.47e-06  distance_bp=700
+      PRKAR2B / enh1:enh3                          -0.2023  qval=6.56e-21  distance_bp=2.87e+04
+      DDIT4 / enh5:enh3                            -0.0991  qval=3.42e-20  distance_bp=4.81e+04
+      RHAG / enh2:enh5                             -0.0917  qval=2.1e-06  distance_bp=1.36e+05
+      MGAT1 / enh1:enh2                            -0.0747  qval=0.285  distance_bp=2.85e+04
+      MGAT1 / enh1:enh2-3                          -0.0631  qval=0.497  distance_bp=2.78e+04
+      SLC25A37 / enh1:enh2                         -0.0569  qval=4.04e-70  distance_bp=1.45e+04
+      ALDH1A1 / enh1:enh2                          -0.0538  qval=3.77e-05  distance_bp=nan
+      FAM89A / enh1:enh3                           -0.0495  qval=0.514  distance_bp=1.94e+04
+      HHEX / enh1:enh3                             -0.0453  qval=2.06e-15  distance_bp=5.97e+04
+    most positive (showing 10 of 26):
+      CHD1 / enh1:enh1-2                           +0.0361  qval=0.28  distance_bp=640
+      HHEX / enh3:enh3-2                           +0.0115  qval=0.177  distance_bp=780
+      CXXC5 / enh1:enh2                            +0.0098  qval=0.00148  distance_bp=680
+      CTSL / enh5:enh6                             +0.0078  qval=0.0459  distance_bp=6.78e+03
+      PRKAR2B / enh3:enh4                          +0.0056  qval=0.992  distance_bp=2.82e+03
+      BHLHE40 / enh1:enh3                          +0.0047  qval=0.992  distance_bp=8.08e+03
+      MFGE8 / enh1:enh2                            +0.0026  qval=0.992  distance_bp=2.11e+04
+      PTK2 / enh2:enh2-2                           +0.0022  qval=0.992  distance_bp=500
+      PIM1 / enh6:enh8                             +0.0022  qval=0.992  distance_bp=1.96e+04
+      FAM178B / enh3:enh2                          +0.0018  qval=0.992  distance_bp=5.48e+03
+
+4.3  ATAC VS RNA INTERACTIONS
+  ATAC vs RNA beta_ij                n=98    r=+0.366 p=0.0002     rho=+0.332 p=0.0008
+  sign concordant: 61/98 (62.2%)
+
+4.4  ADDITIVITY PER GENE
+  I per gene                         n=33    median=-0.003  IQR=[-0.051,+0.000]  range=[-0.290,+0.011]
+  direction                          super-additive(<0)=24  sub-additive(>0)=9
+    most negative (showing 10 of 24):
+      MGAT1                                        -0.2900
+      PRKAR2B                                      -0.2375
+      DDIT4                                        -0.1373
+      RHAG                                         -0.1054
+      HHEX                                         -0.0800
+      SLC25A37                                     -0.0768
+      FAM89A                                       -0.0722
+      ALDH1A1                                      -0.0539
+      ANXA1                                        -0.0509
+      GYPC                                         -0.0368
+    most positive (showing 9 of 9):
+      CXXC5                                        +0.0114
+      CHD1                                         +0.0114
+      PRKCB                                        +0.0024
+      CTSL                                         +0.0017
+      PTK2                                         +0.0015
+      COA1                                         +0.0011
+      PGGHG                                        +0.0010
+      CTSB                                         +0.0004
+      MACF1                                        +0.0001
+
+4.5  VALIDATION AGAINST CRISPRi
+  single enhancers:
+    Pearson r=+0.450 p=4.5e-05   Spearman rho=+0.424 p=0.0001   slope=+0.535
+    subset                    concordant     rate            95% CI   vs chance
+    all measured            60/76           78.9%     [68.5%,86.6%]   p=3.9e-07
+    in silico significant   46/53           86.8%     [75.2%,93.5%]   p=4.0e-08
+    (an interval spanning 50% carries no evidence of agreement either way)
+  enhancer pairs:
+    Pearson r=-0.048 p=0.7072   Spearman rho=-0.110 p=0.3920   slope=-0.008
+    subset                    concordant     rate            95% CI   vs chance
+    all measured            25/63           39.7%     [28.5%,52.0%]    p=0.1299
+    in silico significant   2/11           18.2%      [5.1%,47.7%]    p=0.0654
+    (an interval spanning 50% carries no evidence of agreement either way)
+
+4.6  INTERDEPENDENCY (cis vs trans)
+  cells=290  cis=94  trans=196
+  cis delta                          n=94    median=-1.960  IQR=[-2.660,-1.369]  range=[-3.695,-0.287]
+  trans delta                        n=196   median=-0.025  IQR=[-0.101,-0.003]  range=[-1.359,+0.127]
+  significant trans effects: 167/196
+  strongest mean trans effect by gene:
+      ALDH1A1              n=2    mean=-0.4034
+      GALM                 n=2    mean=-0.3764
+      RHAG                 n=6    mean=-0.3241
+      PDLIM1               n=2    mean=-0.2276
+      HNRNPLL              n=2    mean=-0.2214
+      GYPC                 n=2    mean=-0.1971
+      PTK2                 n=6    mean=-0.1875
+      NET1                 n=2    mean=-0.1789
+      PIM1                 n=12   mean=-0.1732
+      EZR                  n=6    mean=-0.1552
+
+  DOES TRANS CROSSTALK PREDICT COOPERATIVITY?
+      per gene, ATAC                 n=33    r=-0.204 p=0.2545     rho=-0.104 p=0.5661
+      per locus, ATAC                n=94    r=+0.079 p=0.4468     rho=+0.232 p=0.0242
+      per gene, RNA                  n=33    r=+0.025 p=0.8897     rho=+0.239 p=0.1798
+
+  PER-PAIR CROSSTALK VS INTERACTION:
+    pairs with trans statistics: 63/63
+      strongest vs measured          n=63    r=-0.158 p=0.2170     rho=-0.166 p=0.1933
+      strongest vs in silico         n=63    r=+0.168 p=0.1885     rho=+0.379 p=0.0022
+      asymmetry vs measured          n=63    r=+0.192 p=0.1322     rho=+0.148 p=0.2473
+      asymmetry vs in silico         n=63    r=-0.125 p=0.3295     rho=-0.365 p=0.0032
+      mean vs measured               n=63    r=-0.121 p=0.3466     rho=-0.182 p=0.1523
+    (crosstalk is negative and sub-additivity positive, so
+     the hypothesis predicts a NEGATIVE correlation for
+     strongest, and a POSITIVE one for asymmetry)
+
+4.7  MODEL COMPARISON
+      setting                   n  failed     mean_se   n_terms
+      gamma, order 2           33       0      0.0110       6.8
+      gamma, order 3           33       0      0.0180       8.2
+
+==============================================================================
+4.8  CROSS LEVEL
+==============================================================================
+  [not supplied: cross]
+
+==============================================================================
+5.  FLAGS
+==============================================================================
+  [1] CRITICAL: no specificity control. Motif effects cannot be distinguished from generic sequence perturbation.
+  [2] No split-half saturation check. The naive diagnostic is mathematically coupled and cannot be interpreted alone.
+
+==============================================================================
+END
+==============================================================================

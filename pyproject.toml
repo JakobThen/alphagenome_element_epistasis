@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alphagenome-element-epistasis"
+version = "0.1.0"
+description = "In silico single and pairwise knockouts of enhancers and TF motifs with AlphaGenome, fitted with a log-link GLM."
+readme = "README.md"
+requires-python = ">=3.11"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["element_epistasis*"]

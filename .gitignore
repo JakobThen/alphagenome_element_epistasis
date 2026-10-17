@@ -1,0 +1,21 @@
+__pycache__/
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Jupyter
+.ipynb_checkpoints
+
+# Visual Studio Code
+.vscode/
+tempCodeRunnerFile.py
+
+# Reference genome, annotation cache and other large external files.
+data/reference/*
+
+# Figures written by the test scripts.
+tests/outputs/
+
+# Secrets
+.alphagenome_api_key
+*.egg-info/

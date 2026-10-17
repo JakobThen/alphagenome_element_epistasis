@@ -1,0 +1,625 @@
+==============================================================================
+K562 cross-enhancer TF motif cooperativity
+generated 2026-10-16 20:33
+alpha=0.05   top_n=15
+==============================================================================
+
+------------------------------------------------------------------------------
+1.  INPUTS SUPPLIED
+------------------------------------------------------------------------------
+  inters_rna              518 rows x  27 cols
+  beta_rna                700 rows x  12 cols
+  inters_atac            1736 rows x  23 cols
+  beta_atac              2299 rows x  11 cols
+  interdep               2299 rows x  18 cols
+  pair_agg                 70 rows x  10 cols
+  enh_inters               98 rows x  21 cols
+  enh_mains                94 rows x  11 cols
+  measured_pairs       MISSING
+  tf_pairs                156 rows x  19 cols
+  tf_motifs            MISSING
+  seqlets              MISSING
+  controls             MISSING
+  glm_results_rna          33 fits
+  glm_results_atac         94 fits
+  scope summary        MISSING
+
+------------------------------------------------------------------------------
+2.  READING THIS DOCUMENT
+------------------------------------------------------------------------------
+  Effects are log fold changes against the unperturbed
+  sequence, so scrambling a functional motif gives a negative
+  value. The interaction is the deviation from a multiplicative
+  null, beta_ij = delta_ij - delta_i - delta_j, therefore
+  beta_ij < 0 is SUPER-ADDITIVE and beta_ij > 0 SUB-ADDITIVE.
+
+  Unit of perturbation: one seqlet, labelled by the enhancer
+  that contains it, for example enh1|GATA1. A pair is WITHIN
+  scope when both seqlets sit in one enhancer and ACROSS scope
+  when they sit in different enhancers of the same gene.
+
+  Both scopes were measured in the same 1 Mb window, so the
+  comparison between them is controlled for genomic context.
+  Neither is numerically comparable to the earlier
+  within-enhancer run, which used a differently anchored
+  window; section 11 makes that comparison explicitly and
+  descriptively.
+
+  Expression is predicted RNA at the target gene. Accessibility
+  is predicted ATAC at each enhancer of the gene separately, so
+  a motif has an effect on its own element and on the others.
+
+------------------------------------------------------------------------------
+3.  DESIGN, COVERAGE AND IDENTIFIABILITY
+------------------------------------------------------------------------------
+  genes=33  motif pairs=518  within=157  across=361
+  enhancer pairs with across-scope motif pairs=70
+  within pairs per gene              n=33    median=+4.000  IQR=[+2.000,+6.000]  range=[+0.000,+24.000]
+  across pairs per gene              n=33    median=+8.000  IQR=[+3.000,+16.000]  range=[+0.000,+81.000]
+  genes contributing both scopes: 27 of 33
+  scrambled units per gene           n=33    median=+5.000  IQR=[+4.000,+7.000]  range=[+2.000,+15.000]
+  distinct factors=76  enhancers carrying units=81
+
+  fit diagnostics:
+    RNA, per gene      fits=33  converged=33  rank deficient=0  median n_obs=161
+    ATAC, per locus    fits=94  converged=94  rank deficient=0  median n_obs=221
+
+------------------------------------------------------------------------------
+4.  MOTIF MAIN EFFECTS ON EXPRESSION (beta_i)
+------------------------------------------------------------------------------
+  terms=182  genes=33  factors=76
+  beta_i                             n=182   median=-0.028  IQR=[-0.079,-0.007]  range=[-1.191,+0.031]
+  significant motifs                 115 of 182 at FDR<0.05 (0 untested)
+  direction of beta_i                160/182 super-additive (87.9%)  p=4.7e-27
+  fraction with beta_i < 0: 87.9%
+  median |beta_i| = 0.0288, median |beta_ij| = 0.0030, ratio = 9.6x
+
+  per factor (sorted by mean effect, showing 25 of 76):
+      factor                  n      mean    median
+      ZNF841                  2   -0.4760   -0.4760
+      MKX                     2   -0.4351   -0.4351
+      ZNF471                  1   -0.3608   -0.3608
+      ZNF850                  1   -0.2874   -0.2874
+      MEF2B                   1   -0.2759   -0.2759
+      ZBTB14                  1   -0.2536   -0.2536
+      SMAD2                   4   -0.2418   -0.2734
+      POGK                    1   -0.2112   -0.2112
+      ZNF189                  3   -0.1928   -0.1978
+      MECOM                   2   -0.1927   -0.1927
+      ZSCAN16                 1   -0.1924   -0.1924
+      CUX1                    1   -0.1873   -0.1873
+      ZNF780B                 2   -0.1760   -0.1760
+      GATA6                   8   -0.1709   -0.0578
+      BCL11B                  1   -0.1586   -0.1586
+      ELF1                    2   -0.1572   -0.1572
+      RFX3                    1   -0.1359   -0.1359
+      STAT5A                  8   -0.1284   -0.0480
+      BACH1                   1   -0.1054   -0.1054
+      GATA2                  18   -0.1048   -0.0141
+      MXI1                    1   -0.0775   -0.0775
+      ATF4                    6   -0.0732   -0.0689
+      NFATC1                  1   -0.0723   -0.0723
+      RXRB                    2   -0.0692   -0.0692
+      GATA4                   3   -0.0606   -0.0689
+
+  strongest individual motif effects:
+    largest by magnitude (top 15):
+      RHAG / enh2|GATA2                            -1.1911  qval=2.14e-194
+      ALDH1A1 / enh2|GATA6                         -0.9488  qval=1.07e-67
+      RHAG / enh2|ZNF841                           -0.9000  qval=2.04e-111
+      ALDH1A1 / enh2|MKX                           -0.7408  qval=1.22e-41
+      PIM1 / enh6|STAT5A                           -0.6262  qval=1.02e-254
+      PIM1 / enh6|ZNF471                           -0.3608  qval=3.36e-85
+      PRKAR2B / enh1|ZNF189                        -0.3561  qval=5.54e-173
+      FAM178B / enh3|SMAD2                         -0.3476  qval=0
+      PDLIM1 / enh1|SMAD2                          -0.2875  qval=2.01e-20
+      GYPC / enh1|ZNF850                           -0.2874  qval=4.98e-137
+      NET1 / enh6|GATA2                            -0.2770  qval=1.49e-09
+      PDLIM1 / enh1|MEF2B                          -0.2759  qval=6.95e-19
+      FAM89A / enh1|MECOM                          -0.2679  qval=1.38e-160
+      FAM89A / enh1|SMAD2                          -0.2592  qval=2.46e-150
+      PRKAR2B / enh1|ZBTB14                        -0.2536  qval=3.08e-88
+
+==============================================================================
+5.  MOTIF PAIR INTERACTIONS BY SCOPE (beta_ij, expression)
+==============================================================================
+
+5.1  DISTRIBUTIONS
+      scope                 n      median                   IQR   super-add
+      within              157     +0.0130     [+0.0031,+0.0397]       17.8%
+      across              361     -0.0009     [-0.0025,+0.0007]       65.1%
+      all                 518     -0.0001     [-0.0018,+0.0069]       50.8%
+
+  direction, within                  28/157 super-additive (17.8%)  p=1.1e-16
+  |beta_ij|, within                  n=157   median=+0.014  IQR=[+0.004,+0.040]  range=[+0.000,+0.909]
+  direction, across                  235/361 super-additive (65.1%)  p=1.0e-08
+  |beta_ij|, across                  n=361   median=+0.002  IQR=[+0.001,+0.005]  range=[+0.000,+0.059]
+
+  within vs across, signed           n=157 vs 361  p=1.5e-36
+  within vs across, magnitude        n=157 vs 361  p=1.4e-25
+
+5.2  SIGNIFICANCE
+  significant, within                64 of 157 at FDR<0.05 (0 untested)
+  significant, across                11 of 361 at FDR<0.05 (0 untested)
+  BH within interactions only        66 of 518 at FDR<0.05
+      within     56 of 157
+      across     10 of 361
+
+5.3  PER GENE, PAIRED
+  genes with both scopes: 27
+  median per-gene within = +0.0161, across = -0.0009
+  median difference (within minus across) = +0.0173  Wilcoxon p=1.5e-08
+  genes where within is more negative: 0/27
+  This is the scope contrast controlled for gene identity; the pooled test above is not.
+
+5.4  SATURATION COUPLING
+  beta_ij vs beta_i + beta_j         n=518   r=-0.452 p=2.1e-27    rho=-0.101 p=0.0218
+  |beta_ij| vs |beta_i + beta_j|     n=518   r=+0.582 p=2.9e-48    rho=+0.528 p=1.4e-38
+    restricted to within             n=157   r=-0.913 p=3.2e-62    rho=-0.792 p=4.3e-35
+    restricted to across             n=361   r=+0.479 p=4.5e-22    rho=+0.087 p=0.1007
+  A NEGATIVE slope is the signature of a floor or of predictor
+  compression; a positive one is not explained by either.
+  This diagnostic is mathematically coupled, since beta_ij and
+  the main effects are estimated from overlapping observations.
+
+5.5  HOMOTYPIC VERSUS HETEROTYPIC PAIRS
+      class                 n      median                   IQR   super-add
+      homotypic            11     -0.0013     [-0.0023,+0.0004]       72.7%
+      heterotypic         507     -0.0000     [-0.0018,+0.0071]       50.3%
+
+  homotypic vs heterotypic           n=11 vs 507  p=0.1055
+
+5.6  EXTREME PAIRS
+    scope: within
+    most negative (showing 15 of 28):
+      PIM1 / enh6|STAT5A:enh6|ELF1                 -0.0157  qval=0.998  distance_bp=71.5
+      CTSL / enh6|ZSCAN4:enh6|GLI3                 -0.0098  qval=0.0441  distance_bp=81.5
+      CTSL / enh6|GATA2:enh6|GLI3                  -0.0094  qval=0.0592  distance_bp=138
+      PRKCB / enh4|FLI1#1:enh4|FLI1#2              -0.0093  qval=0.327  distance_bp=12.5
+      PDLIM1 / enh1|KLF4#2:enh1|KLF4#1             -0.0085  qval=0.998  distance_bp=168
+      CTSL / enh6|GATA4:enh6|GLI3                  -0.0076  qval=0.171  distance_bp=114
+      DDIT4 / enh6|NFYB:enh6|E2F6                  -0.0045  qval=0.55  distance_bp=22
+      FAM178B / enh1|ZFP335:enh1|CTCFL             -0.0037  qval=0.998  distance_bp=56
+      MGAT1 / enh1|KLF1:enh1|ZNF189                -0.0031  qval=0.696  distance_bp=108
+      FAM178B / enh1|CTCFL:enh1|IKZF2              -0.0031  qval=0.998  distance_bp=20.5
+      PRKCB / enh1|SP5:enh1|NFYB                   -0.0020  qval=0.998  distance_bp=108
+      CHD1 / enh3|SRF:enh3|KLF9                    -0.0019  qval=0.998  distance_bp=190
+      PRKCB / enh1|GATA2:enh1|NFYB                 -0.0018  qval=0.998  distance_bp=68.5
+      HHEX / enh1-enh2|ZNF362:enh1-enh2|FLI1       -0.0015  qval=0.998  distance_bp=89
+      HNRNPLL / enh1|FOXF1:enh1|ZNF558             -0.0014  qval=0.998  distance_bp=120
+    most positive (showing 15 of 129):
+      RHAG / enh2|GATA2:enh2|ZNF841                +0.9091  qval=2.86e-56  distance_bp=14
+      ALDH1A1 / enh2|GATA6:enh2|MKX                +0.6172  qval=1.45e-19  distance_bp=12
+      FAM89A / enh1|MECOM:enh1|SMAD2               +0.2604  qval=1.14e-69  distance_bp=13
+      GYPC / enh1|ZNF850:enh1|ZNF780B              +0.2382  qval=2.64e-52  distance_bp=16
+      PRKAR2B / enh1|ZNF189:enh1|ZBTB14            +0.2314  qval=6.21e-49  distance_bp=14
+      PIM1 / enh6|STAT5A:enh6|ZNF471               +0.1732  qval=2.18e-10  distance_bp=47
+      GYPC / enh1|STAT5A:enh1|ZNF850               +0.1732  qval=4.24e-28  distance_bp=61.5
+      PDLIM1 / enh1|MEF2B:enh1|SMAD2               +0.1724  qval=0.00012  distance_bp=29.5
+      NET1 / enh6|GATA2:enh6|BCL11B                +0.1590  qval=0.00349  distance_bp=13
+      FAM178B / enh3|SMAD2:enh3|ZNF189             +0.1560  qval=8.1e-90  distance_bp=43
+      GYPC / enh1|STAT5A:enh1|ZNF780B              +0.1260  qval=2.84e-15  distance_bp=77.5
+      SLC25A37 / enh1|CUX1:enh1|SP5                +0.1228  qval=2.21e-30  distance_bp=31
+      ANXA1 / enh1|GATA6:enh1|MKX                  +0.1137  qval=1.56e-19  distance_bp=12
+      MFGE8 / enh2|ATF4:enh2|ELF1                  +0.1083  qval=1.26e-44  distance_bp=17.5
+      PDLIM1 / enh1|MEF2B:enh1|KLF4#1              +0.1075  qval=0.0329  distance_bp=80.5
+    scope: across
+    most negative (showing 15 of 235):
+      RHAG / enh2|GATA2:enh5|FLI1                  -0.0590  qval=0.708  distance_bp=1.36e+05
+      RHAG / enh2|GATA2:enh5|MGA::EVX1             -0.0522  qval=0.806  distance_bp=1.36e+05
+      RHAG / enh2|GATA2:enh5|ZNF317                -0.0450  qval=0.93  distance_bp=1.36e+05
+      FAM89A / enh1|MECOM:enh3|ZSCAN16             -0.0424  qval=0.0154  distance_bp=1.93e+04
+      FAM89A / enh1|SMAD2:enh3|ZSCAN16             -0.0383  qval=0.0341  distance_bp=1.93e+04
+      GYPC / enh1|ZNF850:enh2|MECOM                -0.0350  qval=0.0815  distance_bp=5.83e+03
+      SLC25A37 / enh1|CUX1:enh2|KLF1               -0.0334  qval=0.00622  distance_bp=1.46e+04
+      ALDH1A1 / enh2|GATA6:enh1|FOS                -0.0327  qval=0.998  distance_bp=4.25e+04
+      GYPC / enh1|ZNF780B:enh2|MECOM               -0.0290  qval=0.195  distance_bp=5.84e+03
+      GYPC / enh1|STAT5A:enh2|MECOM                -0.0283  qval=0.212  distance_bp=5.77e+03
+      RHAG / enh2|ZNF841:enh5|FLI1                 -0.0280  qval=0.998  distance_bp=1.36e+05
+      GYPC / enh1|ZNF850:enh2|KLF4                 -0.0259  qval=0.286  distance_bp=5.87e+03
+      RHAG / enh2|ZNF841:enh5|MGA::EVX1            -0.0252  qval=0.998  distance_bp=1.36e+05
+      PDLIM1 / enh1|MEF2B:enh2|FOS                 -0.0248  qval=0.998  distance_bp=6.26e+03
+      SLC25A37 / enh1|SP5:enh2|KLF1                -0.0247  qval=0.0682  distance_bp=1.46e+04
+    most positive (showing 15 of 126):
+      RHAG / enh5|ZNF317:enh4|CREB1                +0.0179  qval=0.998  distance_bp=1.15e+05
+      RHAG / enh5|FLI1:enh4|ATF4                   +0.0174  qval=0.998  distance_bp=1.15e+05
+      RHAG / enh5|FLI1:enh4|CREB1                  +0.0173  qval=0.998  distance_bp=1.15e+05
+      RHAG / enh5|ZNF317:enh4|ATF4                 +0.0164  qval=0.998  distance_bp=1.15e+05
+      RHAG / enh5|MGA::EVX1:enh4|CREB1             +0.0163  qval=0.998  distance_bp=1.15e+05
+      RHAG / enh5|MGA::EVX1:enh4|ATF4              +0.0163  qval=0.998  distance_bp=1.15e+05
+      PIM1 / enh6|STAT5A:enh8|GATA2                +0.0112  qval=0.998  distance_bp=1.96e+04
+      PIM1 / enh6|STAT5A:enh8|IKZF2                +0.0110  qval=0.998  distance_bp=1.96e+04
+      PIM1 / enh6|ZNF471:enh8|IKZF2                +0.0110  qval=0.998  distance_bp=1.96e+04
+      PIM1 / enh6|ELF1:enh8|IKZF2                  +0.0108  qval=0.998  distance_bp=1.96e+04
+      PIM1 / enh7|GATA1:enh8|IKZF2                 +0.0105  qval=0.998  distance_bp=1.1e+04
+      PIM1 / enh6|ELF1:enh8|GATA2                  +0.0104  qval=0.998  distance_bp=1.95e+04
+      CXXC5 / enh2|STAT5A:enh1|FOS                 +0.0103  qval=4.11e-06  distance_bp=646
+      PIM1 / enh6|ZNF471:enh8|GATA2                +0.0103  qval=0.998  distance_bp=1.96e+04
+      RHAG / enh2|ZNF841:enh4|CREB1                +0.0103  qval=0.998  distance_bp=2.07e+04
+
+------------------------------------------------------------------------------
+6.  RECURRENT FACTOR GRAMMAR
+------------------------------------------------------------------------------
+
+  within-enhancer factor pairs seen at least twice (n=13):
+      factor pair                       n       mean     median   sig
+      FOS x SP5                         2    +0.0028    +0.0028     0
+      FOS x GATA2                       3    +0.0033    +0.0035     0
+      FOS x ZSCAN31                     2    +0.0044    +0.0044     0
+      GATA2 x STAT5A                    2    +0.0058    +0.0058     0
+      GATA2 x SP5                       3    +0.0131    +0.0053     1
+      FLI1 x MAFF                       2    +0.0152    +0.0152     1
+      KLF4 x RFX3                       2    +0.0235    +0.0235     0
+      GATA2 x KLF1                      2    +0.0262    +0.0262     2
+      KLF1 x STAT5A                     3    +0.0287    +0.0249     1
+      KLF4 x MEF2B                      2    +0.0584    +0.0584     1
+      KLF4 x SMAD2                      2    +0.0652    +0.0652     1
+      SMAD2 x ZNF189                    2    +0.0879    +0.0879     2
+      GATA6 x MKX                       2    +0.3654    +0.3654     2
+
+  across-enhancer factor pairs seen at least twice (n=52):
+      factor pair                       n       mean     median   sig
+      FOS x GATA6                       2    -0.0245    -0.0245     0
+      FOS x KLF4                        2    -0.0224    -0.0224     0
+      FOS x MKX                         2    -0.0170    -0.0170     0
+      KLF1 x SP5                        3    -0.0135    -0.0151     1
+      FLI1 x GATA2                      6    -0.0115    -0.0015     0
+      GATA6 x SP5                       2    -0.0087    -0.0087     1
+      GLI3 x KLF1                       2    -0.0042    -0.0042     0
+      ELK x GATA6                       2    -0.0039    -0.0039     0
+      GATA4 x KLF1                      3    -0.0037    -0.0059     0
+      KLF1 x KLF1                       2    -0.0023    -0.0023     0
+      KLF1 x ZSCAN4                     2    -0.0023    -0.0023     0
+      GATA2 x KLF1                      6    -0.0022    -0.0019     0
+      FOS x GATA4                       3    -0.0022    -0.0014     0
+      MAFF x SP5                        2    -0.0019    -0.0019     0
+      GATA2 x SP5                       5    -0.0017    -0.0015     0
+      FLI1 x ZNF335                     2    -0.0017    -0.0017     0
+      FLI1 x SP5                        4    -0.0015    -0.0012     0
+      FLI1 x THAP1                      2    -0.0014    -0.0014     0
+      GATA2 x MAFF                      2    -0.0012    -0.0012     0
+      FLI1 x MYB                        2    -0.0012    -0.0012     0
+      FLI1 x NFYB                       2    -0.0011    -0.0011     0
+      ATF4 x FOS                        3    -0.0011    -0.0006     0
+      GATA2 x ZNF335                    2    -0.0010    -0.0010     0
+      GATA2 x PLAGL1                    3    -0.0010    -0.0012     0
+      SP5 x THAP1                       2    -0.0010    -0.0010     0
+      SP5 x STAT5A                      2    -0.0010    -0.0010     0
+      FOS x PLAGL1                      2    -0.0009    -0.0009     0
+      KLF1 x STAT5A                     2    -0.0009    -0.0009     0
+      PLAGL1 x SP5                      3    -0.0008    -0.0009     0
+      MYB x SP5                         2    -0.0007    -0.0007     0
+      ... 22 further pairs
+
+  per factor across all its pairs (n>=3, 70 factors):
+      factor                  n       mean     median
+      POGK                    5    -0.0087    -0.0000
+      GLI3                    8    -0.0061    -0.0052
+      ZNF76                   3    -0.0045    -0.0044
+      ZSCAN16                 7    -0.0019    +0.0017
+      E2F6                    5    -0.0019    -0.0024
+      ZNF362                  4    -0.0010    -0.0011
+      ZNF281                  4    -0.0007    -0.0009
+      ZNF335                 14    -0.0005    -0.0011
+      NFYB                   27    -0.0005    -0.0014
+      CTCFL                   6    -0.0003    +0.0008
+      ZNF708                  5    -0.0000    -0.0012
+      PKNOX1                 14    +0.0001    -0.0001
+      FLI1                   46    +0.0003    -0.0009
+      ZNF416                  4    +0.0006    +0.0001
+      POU2F3                  7    +0.0009    -0.0006
+      MAFF                   14    +0.0009    -0.0014
+      ZNF490                  6    +0.0010    +0.0009
+      GLI2                    5    +0.0011    +0.0003
+      SP1                     7    +0.0013    -0.0001
+      ZNF417                  4    +0.0014    +0.0016
+      SP5                    53    +0.0016    -0.0010
+      ZFP335                  6    +0.0017    -0.0004
+      REST                    8    +0.0020    +0.0004
+      FOS                    86    +0.0028    -0.0000
+      ZSCAN31                14    +0.0032    +0.0003
+      ZNF865                  7    +0.0036    +0.0025
+      BCL11A                  7    +0.0037    +0.0026
+      THAP1                  14    +0.0038    -0.0008
+      MYB                    17    +0.0044    -0.0003
+      SRF                     4    +0.0046    +0.0028
+
+------------------------------------------------------------------------------
+7.  DISTANCE DEPENDENCE
+------------------------------------------------------------------------------
+  pairs with a distance: 518 of 518
+  distance (bp)                      n=518   median=+11241.000  IQR=[+87.875,+27811.000]  range=[+9.000,+292594.000]
+  distance vs beta_ij                n=518   r=-0.161 p=0.0002     rho=-0.504 p=1.0e-34
+  log10 distance vs beta_ij          n=518   r=-0.367 p=6.1e-18    rho=-0.504 p=1.0e-34
+
+  within each scope, since scope determines the distance range
+  and the pooled correlation is confounded by it:
+    within                           n=157   r=-0.216 p=0.0066     rho=-0.269 p=0.0007
+    within distance                  n=157   median=+45.000  IQR=[+22.000,+75.500]  range=[+9.000,+193.000]
+    across                           n=361   r=-0.103 p=0.0511     rho=-0.112 p=0.0338
+    across distance                  n=361   median=+20757.000  IQR=[+10036.000,+37177.000]  range=[+381.500,+292594.000]
+
+      bin                     n      median                   IQR   super-add
+      <100 bp             134     +0.0169     [+0.0038,+0.0473]       14.9%
+      100 bp to 1 kb       32     +0.0012     [-0.0019,+0.0091]       43.8%
+      1 to 10 kb           80     -0.0006     [-0.0022,+0.0020]       52.5%
+      10 to 100 kb        249     -0.0009     [-0.0022,+0.0003]       69.5%
+      >100 kb              23     -0.0033     [-0.0187,+0.0108]       60.9%
+
+==============================================================================
+8.  ACCESSIBILITY: MOTIF INTERDEPENDENCY
+==============================================================================
+
+8.1  SINGLE MOTIFS (beta_i on accessibility)
+  cells=563  genes=33
+      class                 n      median                   IQR    negative
+      cis                 182     -0.5858     [-0.9632,-0.3964]      100.0%
+      trans               381     -0.0236     [-0.0848,-0.0082]       97.1%
+  cis to trans median ratio: 24.8x
+  significant, cis                   166 of 182 at FDR<0.05 (0 untested)
+  significant, trans                 106 of 381 at FDR<0.05 (0 untested)
+
+8.2  MOTIF PAIRS (beta_ij on accessibility)
+  cells=1736  genes=33
+      class                 n      median                   IQR   super-add
+      cis                 157     +0.0711     [-0.0331,+0.2589]       36.9%
+      mixed               722     -0.0006     [-0.0085,+0.0043]       53.5%
+      trans               857     +0.0029     [+0.0003,+0.0118]       22.8%
+
+  cis: both motifs inside the measured enhancer, local grammar
+  mixed: one motif inside and one elsewhere, the direct test of
+         whether a distant motif modulates local grammar
+  trans: neither motif inside, both acting at a distance
+
+  Kruskal-Wallis across the three classes: p=1.7e-37
+  cis vs mixed                       n=157 vs 722  p=2.0e-09
+  cis vs trans                       n=157 vs 857  p=2.7e-05
+  mixed vs trans                     n=722 vs 857  p=2.5e-37
+
+  significant, cis                   50 of 157 at FDR<0.05 (0 untested)
+  significant, mixed                 6 of 722 at FDR<0.05 (0 untested)
+  significant, trans                 51 of 857 at FDR<0.05 (0 untested)
+
+8.3  THE MIXED CLASS IN DETAIL
+  direction, mixed                   386/722 super-additive (53.5%)  p=0.0681
+  |beta_ij|, mixed                   n=722   median=+0.006  IQR=[+0.002,+0.021]  range=[+0.000,+0.252]
+  mixed vs cis, magnitude            n=722 vs 157  p=8.0e-56
+
+  strongest mixed-class cells:
+    most negative (showing 15 of 386):
+      CXXC5_enh1 / CXXC5_enh2|STAT5A x CXXC5_enh1|FOS -0.2522  qval=5.2e-07
+      CXXC5_enh1 / CXXC5_enh2|KLF1 x CXXC5_enh1|FOS -0.2251  qval=1.08e-05
+      PIM1_enh7 / PIM1_enh6|STAT5A x PIM1_enh7|GATA1 -0.2211  qval=8.91e-05
+      MACF1_enh1 / MACF1_enh3|SP1 x MACF1_enh1|GATA2 -0.2048  qval=1
+      MACF1_enh1 / MACF1_enh3|SP1 x MACF1_enh1|STAT5A -0.2037  qval=1
+      MACF1_enh1 / MACF1_enh3|SP1 x MACF1_enh1|FLI1 -0.1963  qval=1
+      SLC25A37_enh2 / SLC25A37_enh1|CUX1 x SLC25A37_enh2|KLF1 -0.1685  qval=0.436
+      RHAG_enh5 / RHAG_enh2|GATA2 x RHAG_enh5|FLI1 -0.1558  qval=1
+      SLC25A37_enh1 / SLC25A37_enh1|CUX1 x SLC25A37_enh2|KLF1 -0.1504  qval=0.877
+      CTSL_enh5 / CTSL_enh6|GATA2 x CTSL_enh5|KLF1 -0.1300  qval=1
+      RHAG_enh5 / RHAG_enh2|ZNF841 x RHAG_enh5|FLI1 -0.1270  qval=1
+      CXXC5_enh2 / CXXC5_enh2|STAT5A x CXXC5_enh1|FOS -0.1266  qval=0.89
+      EZR_enh1 / EZR_enh1|GATA2 x EZR_enh1-2|GATA6 -0.1252  qval=1.32e-19
+      PIM1_enh7 / PIM1_enh6|ZNF471 x PIM1_enh7|GATA1 -0.1223  qval=0.0868
+      CTSL_enh5 / CTSL_enh6|GATA4 x CTSL_enh5|KLF1 -0.1212  qval=1
+    most positive (showing 15 of 336):
+      CTSL_enh6 / CTSL_enh6|GLI3 x CTSL_enh4|FOS   +0.1049  qval=1
+      CTSL_enh6 / CTSL_enh6|GLI3 x CTSL_enh4|KLF1  +0.1048  qval=1
+      EZR_enh2 / EZR_enh2|ZNF708 x EZR_enh1-2|GATA6 +0.0949  qval=0.867
+      EZR_enh2 / EZR_enh2|KLF4 x EZR_enh1-2|GATA6  +0.0948  qval=0.868
+      EZR_enh2 / EZR_enh2|SP5 x EZR_enh1-2|GATA6   +0.0946  qval=0.87
+      EZR_enh2 / EZR_enh2|FLI1 x EZR_enh1-2|GATA6  +0.0941  qval=0.877
+      EZR_enh2 / EZR_enh2|FLI1 x EZR_enh1|GATA2    +0.0923  qval=0.897
+      EZR_enh2 / EZR_enh2|KLF4 x EZR_enh1|GATA2    +0.0915  qval=0.905
+      EZR_enh2 / EZR_enh2|ZNF708 x EZR_enh1|GATA2  +0.0912  qval=0.91
+      CTSL_enh6 / CTSL_enh6|GLI3 x CTSL_enh5|KLF1  +0.0912  qval=1
+      EZR_enh2 / EZR_enh2|SP5 x EZR_enh1|GATA2     +0.0886  qval=0.949
+      CTSL_enh6 / CTSL_enh6|GLI3 x CTSL_enh5|RBPJ  +0.0857  qval=1
+      CTSL_enh6 / CTSL_enh6|GLI3 x CTSL_enh5|GATA2 +0.0837  qval=1
+      ALDH1A1_enh1 / ALDH1A1_enh2|GATA6 x ALDH1A1_enh1|FOS +0.0741  qval=1
+      CTSL_enh6 / CTSL_enh6|GATA4 x CTSL_enh4|KLF1 +0.0738  qval=1
+
+------------------------------------------------------------------------------
+9.  EXPRESSION VERSUS ACCESSIBILITY, SAME PAIRS
+------------------------------------------------------------------------------
+  matched cells=1736  distinct pairs=518
+  ATAC beta_ij vs RNA beta_ij        n=1736  r=+0.445 p=2.6e-85    rho=+0.452 p=3.3e-88
+  sign concordant: 1113/1736 (64.1%)
+
+  by relation of the pair to the measured enhancer:
+    cis                              n=157   r=+0.391 p=4.1e-07    rho=+0.178 p=0.0261
+    mixed                            n=722   r=+0.262 p=9.0e-13    rho=+0.229 p=4.5e-10
+    trans                            n=857   r=+0.794 p=1.0e-186   rho=+0.652 p=6.2e-105
+
+  Accessibility is measured at one enhancer and expression
+  at the gene, so agreement is expected only where the
+  measured enhancer is one that the pair acts through.
+
+==============================================================================
+10.  DOES MOTIF GRAMMAR EXPLAIN THE ENHANCER INTERACTION
+==============================================================================
+  enhancer pairs on the motif side: 70
+  enhancer pairs on the knockout side: 98
+  matched: 70
+  motif pairs per enhancer pair      n=70    median=+4.000  IQR=[+3.000,+6.000]  range=[+1.000,+25.000]
+
+      aggregation             n        r           p      rho           p  sign agree
+      motif_mean             70   +0.775      0.0000   +0.340      0.0040       57.1%
+      motif_sum              70   +0.668      0.0000   +0.303      0.0109       57.1%
+      motif_strongest        70   +0.805      0.0000   +0.367      0.0018       61.4%
+      motif_max              70   +0.652      0.0000   +0.303      0.0107       51.4%
+  motif_mean is the primary aggregation; motif_sum grows with the number of
+  motif pairs tested and is therefore confounded with seqlet coverage.
+  motif_mean | n_motif_pairs         n=70    partial r=+0.781 p=2.5e-15
+
+  restricted to enhancer pairs significant at the knockout level (n=13):
+    motif_mean vs beta_ij            n=13    r=+0.878 p=8.0e-05    rho=+0.879 p=7.5e-05
+
+  restricted to enhancer pairs with at least one significant motif pair (n=5):
+    motif_mean vs beta_ij            n=5     r=+0.858 p=0.0626     rho=+0.500 p=0.3910
+
+  [not supplied: measured_pairs] the screen comparison at this level is untested
+
+------------------------------------------------------------------------------
+11.  CONTRAST WITH THE WITHIN-ENHANCER RUN
+------------------------------------------------------------------------------
+  earlier run: pairs=156  enhancers=60
+  I, earlier run (ATAC)              n=156   median=+0.027  IQR=[-0.063,+0.220]  range=[-0.578,+2.180]
+
+  11.1  READOUT-MATCHED AND OBJECT-MATCHED COMPARISON
+  Accessibility measured at the enhancer that contains both
+  motifs, so the only difference from the earlier run is the
+  window anchoring.
+  matched on exact seqlet labels: 155 of 157 cis cells
+  matched on factor names only: 151 (ambiguous where a factor pair recurs)
+  earlier I vs this run beta_ij      n=155   r=+0.953 p=3.8e-81    rho=+0.896 p=1.1e-55
+  sign concordant: 81.9%
+  difference, this minus earlier     n=155   median=+0.011  IQR=[-0.032,+0.081]  range=[-0.379,+0.874]
+
+  11.2  DISTRIBUTION COMPARISON
+  Descriptive only: the earlier run used a different window and,
+  for the expression readout, a different response variable.
+      this, within        157     +0.0130     [+0.0031,+0.0397]       17.8%
+      earlier             156     +0.0274     [-0.0633,+0.2196]       43.6%
+  this within vs earlier             n=157 vs 156  p=0.9587
+
+  11.3  FACTOR PAIRS SEEN AT BOTH LEVELS
+  factor pairs measured in both: 141
+  mean I, earlier vs this            n=141   r=+0.435 p=6.9e-08    rho=+0.145 p=0.0860
+
+==============================================================================
+12.  EXEMPLAR LOCI
+==============================================================================
+  Enhancer pairs at which several levels of the analysis speak to
+  the same object. Ranked by the number of independent lines of
+  evidence, then by the size of the enhancer-level coefficient.
+  Selection is illustrative; these pairs were chosen because they
+  agree, so their agreement is not evidence about the population.
+
+  matched enhancer pairs: 70
+  evidence count distribution: 5/5: 1, 4/5: 2, 3/5: 11, 2/5: 27, 1/5: 29
+  sign agreement between motif mean and enhancer coefficient: 57.1% of 70
+
+  [1] CXXC5   CXXC5_enh1 x CXXC5_enh2   evidence 5/5
+      cross-enhancer motifs   n pairs=2  mean beta_ij=+0.0097  most negative=+0.0091  significant=2
+        lead motif pair       STAT5A (enh2)  x  FOS (enh1)
+                              beta_ij=+0.0103  q=4.1e-06  separation=646 bp
+      enhancer knockout       beta_ij=+0.0098  q=0.0015  distance=680 bp
+        component mains       beta_A=+0.0223  beta_B=-0.0660
+      accessibility, mixed    n=4  median=-0.1759  significant=2
+      within-enhancer         B (CXXC5_enh2): 1 within-scope pair(s) here, median +0.0451; 1 pair(s) in the earlier run
+      summary                 enhancer level is sub-additive; motif mean and enhancer coefficient agree in sign
+
+  [2] DDIT4   DDIT4_enh3 x DDIT4_enh5   evidence 4/5
+      cross-enhancer motifs   n pairs=2  mean beta_ij=-0.0221  most negative=-0.0246  significant=2
+        lead motif pair       POGK (enh3)  x  GATA6 (enh5)
+                              beta_ij=-0.0246  q=5.9e-11  separation=48,067 bp
+      enhancer knockout       beta_ij=-0.0991  q=3.4e-20  distance=48,120 bp
+        component mains       beta_A=-0.3684  beta_B=-0.2087
+      accessibility, mixed    n=4  median=-0.0051  significant=0
+      within-enhancer         B (DDIT4_enh5): 1 within-scope pair(s) here, median +0.0509; 1 pair(s) in the earlier run
+      summary                 enhancer level is super-additive; motif mean and enhancer coefficient agree in sign
+
+  [3] SLC25A37   SLC25A37_enh1 x SLC25A37_enh2   evidence 4/5
+      cross-enhancer motifs   n pairs=4  mean beta_ij=-0.0237  most negative=-0.0334  significant=1
+        lead motif pair       CUX1 (enh1)  x  KLF1 (enh2)
+                              beta_ij=-0.0334  q=0.0062  separation=14,640 bp
+      enhancer knockout       beta_ij=-0.0569  q=4.0e-70  distance=14,540 bp
+        component mains       beta_A=-0.1834  beta_B=-0.1280
+      accessibility, mixed    n=8  median=-0.1033  significant=0
+      within-enhancer         A (SLC25A37_enh1): 1 within-scope pair(s) here, median +0.1228; 1 pair(s) in the earlier run
+                              B (SLC25A37_enh2): 1 within-scope pair(s) here, median +0.0694; 1 pair(s) in the earlier run
+      summary                 enhancer level is super-additive; motif mean and enhancer coefficient agree in sign
+
+  [4] RHAG   RHAG_enh2 x RHAG_enh5   evidence 3/5
+      cross-enhancer motifs   n pairs=6  mean beta_ij=-0.0384  most negative=-0.0590  significant=0
+        lead motif pair       GATA2 (enh2)  x  FLI1 (enh5)
+                              beta_ij=-0.0590  q=0.7084  separation=136,018 bp
+      enhancer knockout       beta_ij=-0.0917  q=2.1e-06  distance=136,100 bp
+        component mains       beta_A=-1.2543  beta_B=-0.0153
+      accessibility, mixed    n=12  median=-0.0936  significant=0
+      within-enhancer         A (RHAG_enh2): 1 within-scope pair(s) here, median +0.9091; 1 pair(s) in the earlier run
+                              B (RHAG_enh5): 3 within-scope pair(s) here, median +0.0326; 3 pair(s) in the earlier run
+      summary                 enhancer level is super-additive; motif mean and enhancer coefficient agree in sign
+
+  [5] MGAT1   MGAT1_enh1 x MGAT1_enh2-3   evidence 3/5
+      cross-enhancer motifs   n pairs=4  mean beta_ij=-0.0144  most negative=-0.0156  significant=4
+        lead motif pair       SP5 (enh2-3)  x  ZNF189 (enh1)
+                              beta_ij=-0.0156  q=4.9e-07  separation=27,813 bp
+      enhancer knockout       beta_ij=-0.0631  q=0.4967  distance=27,820 bp
+        component mains       beta_A=-0.0638  beta_B=-0.0646
+      accessibility, mixed    n=8  median=-0.0376  significant=0
+      within-enhancer         A (MGAT1_enh1): 6 within-scope pair(s) here, median +0.0261; 6 pair(s) in the earlier run
+      summary                 enhancer level is super-additive; motif mean and enhancer coefficient agree in sign
+
+  [6] ALDH1A1   ALDH1A1_enh1 x ALDH1A1_enh2   evidence 3/5
+      cross-enhancer motifs   n pairs=6  mean beta_ij=-0.0194  most negative=-0.0327  significant=0
+        lead motif pair       GATA6 (enh2)  x  FOS (enh1)
+                              beta_ij=-0.0327  q=0.9983  separation=42,514 bp
+      enhancer knockout       beta_ij=-0.0538  q=3.8e-05  distance=n/a bp
+        component mains       beta_A=-0.1174  beta_B=-1.4712
+      accessibility, mixed    n=12  median=+0.0001  significant=0
+      within-enhancer         A (ALDH1A1_enh1): 3 within-scope pair(s) here, median +0.0972; 3 pair(s) in the earlier run
+                              B (ALDH1A1_enh2): 1 within-scope pair(s) here, median +0.6172
+      summary                 enhancer level is super-additive; motif mean and enhancer coefficient agree in sign
+
+  [7] FAM89A   FAM89A_enh1 x FAM89A_enh3   evidence 3/5
+      cross-enhancer motifs   n pairs=4  mean beta_ij=-0.0213  most negative=-0.0424  significant=2
+        lead motif pair       MECOM (enh1)  x  ZSCAN16 (enh3)
+                              beta_ij=-0.0424  q=0.0154  separation=19,316 bp
+      enhancer knockout       beta_ij=-0.0495  q=0.5144  distance=19,420 bp
+        component mains       beta_A=-0.2666  beta_B=-0.1958
+      accessibility, mixed    n=8  median=-0.0209  significant=0
+      within-enhancer         A (FAM89A_enh1): 1 within-scope pair(s) here, median +0.2604; 1 pair(s) in the earlier run
+                              B (FAM89A_enh3): 1 within-scope pair(s) here, median +0.0600; 1 pair(s) in the earlier run
+      summary                 enhancer level is super-additive; motif mean and enhancer coefficient agree in sign
+
+  [8] ANXA1   ANXA1_enh1 x ANXA1_enh3   evidence 3/5
+      cross-enhancer motifs   n pairs=6  mean beta_ij=-0.0098  most negative=-0.0163  significant=0
+        lead motif pair       GATA6 (enh1)  x  FOS (enh3)
+                              beta_ij=-0.0163  q=0.4889  separation=119,318 bp
+      enhancer knockout       beta_ij=-0.0422  q=4.4e-06  distance=n/a bp
+        component mains       beta_A=-0.1972  beta_B=-0.1451
+      accessibility, mixed    n=12  median=-0.0031  significant=0
+      within-enhancer         A (ANXA1_enh1): 1 within-scope pair(s) here, median +0.1137
+                              B (ANXA1_enh3): 3 within-scope pair(s) here, median +0.0279; 3 pair(s) in the earlier run
+      summary                 enhancer level is super-additive; motif mean and enhancer coefficient agree in sign
+
+  [9] GYPC   GYPC_enh1 x GYPC_enh2   evidence 3/5
+      cross-enhancer motifs   n pairs=9  mean beta_ij=-0.0248  most negative=-0.0350  significant=0
+        lead motif pair       ZNF850 (enh1)  x  MECOM (enh2)
+                              beta_ij=-0.0350  q=0.0815  separation=5,827 bp
+      enhancer knockout       beta_ij=-0.0368  q=3.2e-04  distance=5,760 bp
+        component mains       beta_A=-0.3076  beta_B=-0.1300
+      accessibility, mixed    n=18  median=-0.0022  significant=0
+      within-enhancer         A (GYPC_enh1): 3 within-scope pair(s) here, median +0.1732; 3 pair(s) in the earlier run
+                              B (GYPC_enh2): 3 within-scope pair(s) here, median +0.0717; 3 pair(s) in the earlier run
+      summary                 enhancer level is super-additive; motif mean and enhancer coefficient agree in sign
+
+  [10] DDIT4   DDIT4_enh5 x DDIT4_enh6   evidence 3/5
+      cross-enhancer motifs   n pairs=6  mean beta_ij=-0.0024  most negative=-0.0053  significant=0
+        lead motif pair       GATA6 (enh5)  x  E2F6 (enh6)
+                              beta_ij=-0.0053  q=0.4154  separation=22,720 bp
+      enhancer knockout       beta_ij=-0.0312  q=0.0160  distance=22,760 bp
+        component mains       beta_A=-0.2087  beta_B=-0.0269
+      accessibility, mixed    n=12  median=-0.0018  significant=0
+      within-enhancer         A (DDIT4_enh5): 1 within-scope pair(s) here, median +0.0509; 1 pair(s) in the earlier run
+                              B (DDIT4_enh6): 3 within-scope pair(s) here, median +0.0023; 3 pair(s) in the earlier run
+      summary                 enhancer level is super-additive; motif mean and enhancer coefficient agree in sign
+
+  Counter-examples, the pairs where the two levels disagree most:
+      DDIT4_enh3_x_DDIT4_enh6              motif mean=+0.0002  enhancer beta_ij=-0.0154
+      RHAG_enh2_x_RHAG_enh4                motif mean=+0.0066  enhancer beta_ij=-0.0141
+      SLC25A37_enh1_x_SLC25A37_enh3        motif mean=+0.0033  enhancer beta_ij=-0.0132
+
+==============================================================================
+13.  FLAGS
+==============================================================================
+  [1] No cross-enhancer specificity control. Motif effects at this level cannot be separated from generic sequence perturbation; specificity was established only in the within-enhancer run, in a differently anchored window.
+  [2] Distance and scope are collinear by construction, since across-enhancer pairs are separated by orders of magnitude more sequence. Report the within-scope correlations, not the pooled one.
+  [3] Correction family: 75 interactions pass with the supplied q-values but 66 pass when BH is applied to the interaction terms alone. Pooling main effects with interactions is anti-conservative for the interactions.
+  [4] Replicates are dinucleotide shuffles and are technical. Every p-value in this document describes robustness to the shuffle procedure, not biological variability.
+
+==============================================================================
+END
+==============================================================================

@@ -1,0 +1,11 @@
+# Used only when regenerating requirements.lock.txt (see env/README.md).
+# alphagenome_research declares pyBigWig and pyranges, but nothing this project
+# uses from it needs them, and they (or pyranges' ncls and sorted-nearest
+# dependencies) ship prebuilt wheels for Linux only. Restricting them to Linux
+# lets the lock install on Windows and macOS without a compiler.
+pybigwig; sys_platform == "linux"
+pyranges; sys_platform == "linux"
+# orbax-checkpoint (used only to load alphagenome_research model weights) ships
+# test files whose paths exceed the Windows path length limit, so pip cannot
+# install it there unless long paths are enabled system-wide.
+orbax-checkpoint; sys_platform != "win32"

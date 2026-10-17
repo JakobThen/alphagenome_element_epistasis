@@ -1,0 +1,365 @@
+==============================================================================
+K562 enhancer and TF cooperativity
+generated 2026-10-16 20:32
+alpha=0.05   top_n=20
+==============================================================================
+
+------------------------------------------------------------------------------
+1.  INPUTS SUPPLIED
+------------------------------------------------------------------------------
+  motifs                  180 rows x  13 cols
+  controls                276 rows x  11 cols
+  pairs                   156 rows x  19 cols
+  coop_atac                60 rows x  11 cols
+  coop_rna                 59 rows x  11 cols
+  split                   156 rows x  11 cols
+  floor_df                156 rows x   9 cols
+  dose                    364 rows x   9 cols
+  enh_mains            MISSING
+  enh_inters           MISSING
+  atac_inters          MISSING
+  enh_coop             MISSING
+  single_comp          MISSING
+  pair_comp            MISSING
+  interdependency      MISSING
+  comparison           MISSING
+  cross                MISSING
+  trans_by_gene        MISSING
+  trans_by_locus       MISSING
+  coop_atac_gene       MISSING
+  coop_atac_locus      MISSING
+
+------------------------------------------------------------------------------
+2.  READING THIS DOCUMENT
+------------------------------------------------------------------------------
+  Sign convention: effects are log fold changes against the
+  unperturbed sequence, so scrambling gives a negative value.
+  Interaction I = observed minus additive prediction, therefore
+  I < 0 is SUPER-ADDITIVE and I > 0 is SUB-ADDITIVE.
+  Replicates are dinucleotide shuffles, which are technical,
+  not biological. p-values describe robustness to the shuffle
+  procedure only.
+  TF level uses predicted ATAC unless stated; enhancer level
+  uses predicted RNA at the target gene.
+
+==============================================================================
+3.  TF LEVEL (within enhancer)
+==============================================================================
+
+------------------------------------------------------------------------------
+3.1  TF MOTIF MAIN EFFECTS (delta_i, log scale)
+------------------------------------------------------------------------------
+  motifs=180  enhancers=80  distinct factors=76
+  delta_i                            n=180   median=-0.528  IQR=[-0.960,-0.366]  range=[-3.001,+0.041]
+  significant motifs                 176 of 180 at FDR<0.05 (0 untested)
+  attribution vs delta (supp A)      n=180   r=-0.813 p=1.3e-43    rho=-0.721 p=3.7e-30
+
+  per factor (sorted by mean effect, strongest loss first):
+      factor              n      mean    median
+      ZNF850              1    -2.050    -2.050
+      RBPJ                1    -1.673    -1.673
+      ZNF841              2    -1.646    -1.646
+      SMAD2               4    -1.587    -1.490
+      MECOM               2    -1.552    -1.552
+      CTCF                1    -1.502    -1.502
+      MKX                 1    -1.345    -1.345
+      ZNF35               1    -1.213    -1.213
+      ZNF335              1    -1.198    -1.198
+      GATA6               7    -1.191    -1.268
+      GATA2              18    -1.125    -0.738
+      E2F6                1    -1.124    -1.124
+      RXRB                2    -1.110    -1.110
+      ZNF490              1    -1.005    -1.005
+      ZFP335              1    -0.860    -0.860
+      CUX1                1    -0.851    -0.851
+      FLI1                6    -0.822    -0.684
+      GATA1               2    -0.811    -0.811
+      PKNOX1              1    -0.808    -0.808
+      ZNF317              1    -0.792    -0.792
+      GATA4               3    -0.782    -0.831
+      MGA::EVX1           2    -0.762    -0.762
+      ZNF780B             2    -0.760    -0.760
+      FOS                15    -0.734    -0.577
+      STAT5A              8    -0.733    -0.629
+      BACH1               1    -0.724    -0.724
+      ZBTB14              1    -0.700    -0.700
+      ZNF865              1    -0.693    -0.693
+      ZNF189              3    -0.675    -0.563
+      RUNX                2    -0.672    -0.672
+      SP5                 7    -0.640    -0.437
+      REST                1    -0.606    -0.606
+      KLF1               12    -0.572    -0.585
+      ZNF708              1    -0.560    -0.560
+      ELF1                2    -0.545    -0.545
+      MAFF                1    -0.544    -0.544
+      SRF                 1    -0.543    -0.543
+      ZNF362              1    -0.536    -0.536
+      ZSCAN16             1    -0.533    -0.533
+      HAND2               2    -0.530    -0.530
+      BCL11B              1    -0.505    -0.505
+      POGK                1    -0.490    -0.490
+      ZSCAN4              1    -0.486    -0.486
+      NFYB                3    -0.484    -0.285
+      PLAGL1              2    -0.478    -0.478
+      ATF4                6    -0.469    -0.405
+      BCL11A              1    -0.464    -0.464
+      FOXN3               1    -0.461    -0.461
+      ZNF416              1    -0.461    -0.461
+      ZNF558              1    -0.458    -0.458
+      ZNF471              1    -0.433    -0.433
+      IKZF2               2    -0.430    -0.430
+      KLF4                7    -0.425    -0.414
+      MYB                 2    -0.421    -0.421
+      KLF9                2    -0.420    -0.420
+      MEF2B               1    -0.411    -0.411
+      CREB1               2    -0.408    -0.408
+      ZNF135              1    -0.400    -0.400
+      POU2F3              1    -0.383    -0.383
+      ZNF417              1    -0.359    -0.359
+      RFX3                1    -0.357    -0.357
+      SP1                 2    -0.356    -0.356
+      SPDEF               1    -0.354    -0.354
+      E2F7                1    -0.318    -0.318
+      GLI3                1    -0.310    -0.310
+      ELK                 2    -0.303    -0.303
+      GLI2                1    -0.297    -0.297
+      ZNF281              1    -0.250    -0.250
+      NFATC1              1    -0.229    -0.229
+      FOXF1               1    -0.214    -0.214
+      THAP1               1    -0.207    -0.207
+      CTCFL               1    -0.200    -0.200
+      DDIT3               2    -0.189    -0.189
+      ZSCAN31             2    -0.125    -0.125
+      MXI1                1    -0.002    -0.002
+      ZNF76               1    +0.001    +0.001
+
+  strongest individual motif effects:
+    largest by magnitude (top 20):
+      RHAG_enh2 / GATA2                            -3.0006  qval=8.04e-13
+      CTSL_enh5 / GATA2                            -2.5444  qval=2.54e-11
+      MGAT1_enh1 / GATA6                           -2.3116  qval=9.2e-12
+      RHAG_enh2 / ZNF841                           -2.1900  qval=4.26e-06
+      MACF1_enh1 / STAT5A                          -2.1498  qval=1.26e-09
+      MGAT1_enh1 / SMAD2                           -2.1129  qval=4.9e-11
+      MACF1_enh1 / GATA2                           -2.0758  qval=1.85e-05
+      GYPC_enh1 / ZNF850                           -2.0497  qval=1.21e-11
+      COA1_enh1 / FOS                              -2.0287  qval=8.65e-10
+      CTSB_enh1 / GATA2                            -1.8934  qval=2.54e-11
+      MACF1_enh1 / FLI1                            -1.8847  qval=3.59e-05
+      NET1_enh6 / GATA2                            -1.8490  qval=6.17e-13
+      PIEZO1_enh2 / GATA2                          -1.7973  qval=6.17e-13
+      FAM89A_enh1 / MECOM                          -1.7499  qval=8.25e-12
+      CTSL_enh5 / RBPJ                             -1.6726  qval=6.59e-06
+      SLC25A37_enh3 / RXRB                         -1.5955  qval=8.04e-13
+      FAM89A_enh4 / GATA6                          -1.5723  qval=9.2e-12
+      PTK2_enh2 / GATA2                            -1.5675  qval=8.04e-13
+      FAM178B_enh2 / GATA6                         -1.5222  qval=6.17e-13
+      HEMGN_enh1 / CTCF                            -1.5020  qval=1.04e-09
+
+  SPECIFICITY CONTROL (supp B):
+    control windows=276  motifs=180
+    control median=+0.0003   motif median=-0.5282
+    control 5th percentile=-0.1369
+    motifs below that threshold: 170/180 (94.4%)
+    Mann-Whitney (motifs < controls): p=3.0e-65
+
+------------------------------------------------------------------------------
+3.2  TF MOTIF PAIRWISE INTERACTIONS (I, log scale)
+------------------------------------------------------------------------------
+  pairs=156  enhancers=60
+  I                                  n=156   median=+0.027  IQR=[-0.063,+0.220]  range=[-0.578,+2.180]
+  direction                          super-additive(<0)=68  sub-additive(>0)=88  |  significant: 39 super, 65 sub
+  significant pairs                  104 of 156 at FDR<0.05 (0 untested)
+  spacing vs I (supp D)              n=156   r=-0.379 p=1.0e-06    rho=-0.492 p=7.0e-11
+  spacing (bp)                       n=156   median=+35.000  IQR=[+13.000,+66.250]  range=[+0.000,+185.000]
+
+  extreme pairs:
+    most negative (showing 20 of 68):
+      SLC25A37_enh1 / CUX1 / SP5                   -0.5777  qval=0.000209  spacing_bp=21
+      CTSL_enh6 / GATA2 / ZSCAN4                   -0.5400  qval=0.000103  spacing_bp=46
+      PIM1_enh6 / ELF1 / STAT5A                    -0.4621  qval=0.00139  spacing_bp=63
+      EZR_enh2 / KLF4 / ZNF708                     -0.3425  qval=6.06e-07  spacing_bp=27
+      ANXA1_enh3 / DDIT3 / FOS                     -0.3422  qval=6.34e-06  spacing_bp=53
+      CTSL_enh6 / GATA2 / GLI3                     -0.3168  qval=0.00266  spacing_bp=127
+      CXXC5_enh3 / GATA2 / KLF1                    -0.2938  qval=5.88e-05  spacing_bp=36
+      EZR_enh2 / KLF4 / SP5                        -0.2821  qval=0.000707  spacing_bp=35
+      COA1_enh2 / ATF4 / GATA2                     -0.2600  qval=0.000572  spacing_bp=26
+      EZR_enh2 / FLI1 / SP5                        -0.2482  qval=1.6e-05  spacing_bp=50
+      DDIT4_enh5 / ATF4 / GATA6                    -0.2473  qval=2.51e-05  spacing_bp=111
+      PIM1_enh6 / STAT5A / ZNF471                  -0.2315  qval=0.000148  spacing_bp=37
+      BHLHE40_enh1 / KLF1 / STAT5A                 -0.2192  qval=0.00262  spacing_bp=67
+      CTSL_enh6 / GATA2 / GATA4                    -0.2186  qval=0.215  spacing_bp=12
+      EZR_enh2 / FLI1 / ZNF708                     -0.2186  qval=0.000245  spacing_bp=42
+      FAM178B_enh3 / SMAD2 / ZNF189                -0.2184  qval=0.00472  spacing_bp=35
+      MGAT1_enh1 / KLF1 / ZNF189                   -0.2147  qval=0.000198  spacing_bp=98
+      BHLHE40_enh4 / GATA4 / ZSCAN31               -0.2123  qval=0.0603  spacing_bp=9
+      FAM178B_enh1 / CTCFL / ZFP335                -0.1734  qval=0.00899  spacing_bp=48
+      PIM1_enh6 / ELF1 / ZNF471                    -0.1660  qval=0.046  spacing_bp=14
+    most positive (showing 20 of 88):
+      MGAT1_enh1 / GATA6 / SMAD2                   +2.1801  qval=5e-10  spacing_bp=7
+      RHAG_enh2 / GATA2 / ZNF841                   +2.0514  qval=1.6e-05  spacing_bp=2
+      MACF1_enh1 / GATA2 / STAT5A                  +1.5204  qval=7.43e-05  spacing_bp=34
+      FAM89A_enh1 / MECOM / SMAD2                  +1.5188  qval=3.24e-09  spacing_bp=7
+      CTSL_enh5 / GATA2 / RBPJ                     +1.4716  qval=2.44e-05  spacing_bp=3
+      MACF1_enh1 / FLI1 / STAT5A                   +1.3150  qval=0.000162  spacing_bp=15
+      MACF1_enh1 / FLI1 / GATA2                    +1.2873  qval=0.00205  spacing_bp=10
+      RHAG_enh5 / FLI1 / MGA::EVX1                 +1.1923  qval=1.09e-09  spacing_bp=1
+      ALDH1A1_enh2:ANXA1_enh1 / GATA6 / MKX        +1.1842  qval=4.51e-05  spacing_bp=3
+      PTK2_enh2 / GATA2 / SP5                      +1.1324  qval=3.77e-07  spacing_bp=4
+      FAM178B_enh2 / GATA6 / ZNF490                +0.9544  qval=4.54e-07  spacing_bp=3
+      GYPC_enh1 / ZNF780B / ZNF850                 +0.8660  qval=4.51e-05  spacing_bp=4
+      PRKCB_enh1 / FOS / GATA2                     +0.8381  qval=1.65e-05  spacing_bp=2
+      PRKCB_enh2 / SP5 / ZNF335                    +0.6867  qval=0.00899  spacing_bp=0
+      PIEZO1_enh2 / GATA2 / RUNX                   +0.6829  qval=4.51e-05  spacing_bp=58
+      CHD1_enh3 / KLF4 / ZNF35                     +0.5484  qval=0.000332  spacing_bp=13
+      MGAT1_enh1 / GATA6 / KLF1                    +0.5288  qval=0.0007  spacing_bp=44
+      NET1_enh6 / BCL11B / GATA2                   +0.5244  qval=0.000131  spacing_bp=5
+      RHAG_enh5 / FLI1 / ZNF317                    +0.4936  qval=0.00106  spacing_bp=13
+      EZR_enh2 / SP5 / ZNF708                      +0.4722  qval=0.00029  spacing_bp=0
+
+  recurrent factor pairs (seen in 2+ enhancers, n=12):
+      factor pair                    n    mean I    median
+      KLF4 x MEF2B                   2    -0.075    -0.075
+      KLF4 x RFX3                    2    -0.063    -0.063
+      FOS x ZSCAN31                  2    -0.053    -0.053
+      KLF1 x STAT5A                  3    -0.032    -0.000
+      SMAD2 x ZNF189                 2    +0.036    +0.036
+      KLF4 x SMAD2                   2    +0.041    +0.041
+      FOS x SP5                      2    +0.054    +0.054
+      GATA2 x KLF1                   2    +0.069    +0.069
+      FLI1 x MAFF                    2    +0.121    +0.121
+      GATA2 x SP5                    3    +0.386    +0.028
+      FOS x GATA2                    3    +0.398    +0.386
+      GATA2 x STAT5A                 2    +0.729    +0.729
+
+------------------------------------------------------------------------------
+3.3  TF COOPERATIVITY PER ENHANCER
+------------------------------------------------------------------------------
+  enhancers=60
+  I (ATAC)                           n=60    median=+0.225  IQR=[-0.002,+0.642]  range=[-0.619,+3.316]
+  direction                          super-additive(<0)=16  sub-additive(>0)=44  |  significant: 12 super, 36 sub
+  significant enhancers              48 of 60 at FDR<0.05 (0 untested)
+  additive vs observed (main B)      n=60    r=+0.849 p=1.1e-17    rho=+0.891 p=1.5e-21
+
+  by motif count (supp C):
+      n motifs    n enh    median I    mean I         test vs 0
+      2              32      +0.042    +0.214          p=0.1024
+      3              20      +0.428    +0.624          p=0.0027
+      4               4      +0.255    +0.919          p=0.2999
+      5               4      +1.105    +1.061          p=0.0502
+
+  extreme enhancers:
+    most negative (showing 16 of 16):
+      PIM1_enh6                                    -0.6190  n_seqlets=3  qval=0.00137
+      SLC25A37_enh1                                -0.5777  n_seqlets=2  qval=0.000131
+      BHLHE40_enh4                                 -0.3547  n_seqlets=3  qval=0.0102
+      CXXC5_enh3                                   -0.2938  n_seqlets=2  qval=2.6e-05
+      COA1_enh2                                    -0.2600  n_seqlets=2  qval=0.000358
+      DDIT4_enh5                                   -0.2473  n_seqlets=2  qval=1.29e-05
+      BHLHE40_enh1                                 -0.2192  n_seqlets=2  qval=0.00213
+      FAM178B_enh3                                 -0.2184  n_seqlets=2  qval=0.00408
+      ANXA1_enh3                                   -0.1827  n_seqlets=3  qval=0.0103
+      ATP2A3_enh4                                  -0.1497  n_seqlets=2  qval=5.5e-05
+      COA1_enh3                                    -0.1352  n_seqlets=2  qval=2.73e-05
+      PRKAR2B_enh1                                 -0.0588  n_seqlets=2  qval=0.473
+      SLC25A37_enh2                                -0.0358  n_seqlets=2  qval=0.538
+      HHEX_enh1-enh2                               -0.0343  n_seqlets=2  qval=0.0634
+      QPRT_enh1                                    -0.0049  n_seqlets=2  qval=0.867
+      PGGHG_enh1                                   -0.0014  n_seqlets=3  qval=0.0299
+    most positive (showing 20 of 44):
+      MACF1_enh1                                   +3.3158  n_seqlets=3  qval=1.29e-05
+      MGAT1_enh1                                   +3.1191  n_seqlets=4  qval=5.03e-09
+      RHAG_enh2                                    +2.0514  n_seqlets=2  qval=8.32e-06
+      CTSL_enh5                                    +1.9873  n_seqlets=3  qval=4.61e-06
+      PRKCB_enh1                                   +1.7082  n_seqlets=5  qval=9.31e-06
+      RHAG_enh5                                    +1.6655  n_seqlets=3  qval=4.01e-06
+      CHD1_enh3                                    +1.5364  n_seqlets=5  qval=1.19e-05
+      FAM89A_enh1                                  +1.5188  n_seqlets=2  qval=3.74e-09
+      PTK2_enh2                                    +1.2121  n_seqlets=3  qval=1.79e-07
+      ALDH1A1_enh2:ANXA1_enh1                      +1.1842  n_seqlets=2  qval=2.25e-05
+      GYPC_enh1                                    +1.1194  n_seqlets=3  qval=2.47e-05
+      FAM178B_enh2                                 +0.9544  n_seqlets=2  qval=2.18e-07
+      PRKCB_enh2                                   +0.6867  n_seqlets=2  qval=0.00793
+      PIEZO1_enh2                                  +0.6829  n_seqlets=2  qval=2.25e-05
+      PRKCB_enh3                                   +0.6738  n_seqlets=5  qval=0.000342
+      ALDH1A1_enh1                                 +0.6314  n_seqlets=3  qval=2.25e-05
+      FAM89A_enh2                                  +0.6044  n_seqlets=3  qval=7.96e-06
+      PRKCB_enh4                                   +0.5417  n_seqlets=3  qval=2.25e-05
+      NET1_enh6                                    +0.5244  n_seqlets=2  qval=7.43e-05
+      GALM_enh1                                    +0.5186  n_seqlets=3  qval=0.000201
+
+  ATAC vs RNA (main F):
+  ATAC vs RNA coop                   n=59    r=+0.360 p=0.0051     rho=+0.184 p=0.1632
+    sign concordant: 39/59 (66.1%)
+
+------------------------------------------------------------------------------
+3.4  TF ARTEFACT DIAGNOSTICS
+------------------------------------------------------------------------------
+  saturation, naive (supp E, mathematically coupled):
+    I vs delta_A+delta_B             n=156   r=-0.772 p=4.5e-32    rho=-0.463 p=1.2e-09
+    I vs baseline y0 (supp G)        n=156   r=-0.279 p=0.0004     rho=-0.469 p=6.3e-10
+
+  saturation, decoupled (supp F):
+    split-half I vs additive         n=156   r=-0.776 p=1.4e-32    rho=-0.500 p=3.2e-11
+    full-data (coupled)              n=156   r=-0.772 p=4.5e-32    rho=-0.463 p=1.2e-09
+    partial r | log y0                 n=156   r=-0.782 p=3.1e-33
+
+  floor check (supp H):
+    empirical floor = 4.733
+    pairs whose null falls below it: 11/156 (7.1%)
+    headroom (log units above floor) n=156   median=+2.424  IQR=[+1.524,+2.956]  range=[-1.780,+4.635]
+
+  dose response across orders (supp I):
+      order         n    mean dev  median dev   mean pred
+      1           180      +0.000      +0.000      -0.697
+      2           156      +0.126      +0.009      -1.376
+      3            20      +0.550      +0.370      -2.191
+      4             4      +0.827      +0.189      -2.981
+      5             4      +0.902      +0.930      -2.865
+    scrambled bp vs deviation        n=364   r=+0.385 p=2.6e-14    rho=+0.154 p=0.0032
+
+==============================================================================
+4.  ENHANCER LEVEL (GLM, log link)
+==============================================================================
+
+4.1  MAIN EFFECTS (beta_i)
+  [not supplied: enh_mains]
+
+4.2  PAIRWISE INTERACTIONS (beta_ij)
+  [not supplied: enh_inters]
+
+4.3  ATAC VS RNA INTERACTIONS
+  [not supplied: atac_inters]
+
+4.4  ADDITIVITY PER GENE
+  [not supplied: enh_coop]
+
+4.5  VALIDATION AGAINST CRISPRi
+  [not supplied: validation_summaries]
+
+4.6  INTERDEPENDENCY (cis vs trans)
+  [not supplied: interdependency]
+
+  DOES TRANS CROSSTALK PREDICT COOPERATIVITY?
+    [not supplied: trans_by_gene / coop tables]
+
+  PER-PAIR CROSSTALK VS INTERACTION:
+    [not supplied: pair_comp after join_pair_trans]
+
+4.7  MODEL COMPARISON
+  [not supplied: comparison]
+
+==============================================================================
+4.8  CROSS LEVEL
+==============================================================================
+  [not supplied: cross]
+
+==============================================================================
+5.  FLAGS
+==============================================================================
+  [1] Decoupled saturation r=-0.78. Effect magnitudes depend on predicted loss; treat sizes as uncalibrated and rely on sign and rank.
+  [2] Underpowered motif-count groups (4 motifs: 4 enhancer(s), 5 motifs: 4 enhancer(s)). Group tests on these are not informative.
+
+==============================================================================
+END
+==============================================================================
