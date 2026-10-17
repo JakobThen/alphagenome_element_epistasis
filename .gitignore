@@ -23,5 +23,4 @@ results/summaries/*
 *.egg-info/
 
 # Documentation assets
-docs/
-!docs/overview_figure.png
+docs/make_overview_figure.py
