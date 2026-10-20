@@ -6,7 +6,7 @@ The package simulates *in silico* perturbations of user-defined functional eleme
 
 ![Method overview](docs/overview_figure.png)
 
-### What it estimates
+## Base Epistasis Model
 
 For a baseline readout $y_0$ (predicted RNA or ATAC) and the readout $y_i$ after scrambling element $i$:
 
