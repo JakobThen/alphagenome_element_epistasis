@@ -13,6 +13,11 @@ tempCodeRunnerFile.py
 # Reference genome, annotation cache and other large external files.
 data/reference/*
 
+# Original CRISPRi screen inputs and the predictions derived from them;
+# data/raw holds dummy example files in the same formats.
+data/raw_Bauman/
+data/processed_Bauman/
+
 # Outputs and unannotated notebooks
 tests/outputs/
 results/figures/*

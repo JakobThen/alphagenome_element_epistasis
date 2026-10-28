@@ -43,7 +43,7 @@ alphagenome_element_epistasis/
 │   ├── 01_enhancer_knockout.ipynb        enhancer-level knockouts and GLM
 │   └── 02_TF_motif_cooperativity.ipynb   seqlets, within- and cross-enhancer motif interactions
 ├── data/
-│   ├── raw/         CRISPRi screen tables, enhancer BED file, TF list
+│   ├── raw/         CRISPRi screen tables, enhancer BED file, TF list (dummy examples)
 │   ├── meta/        motif databases
 │   ├── processed/   ISM attributions, AlphaGenome predictions, derived tables
 │   └── reference/   hg38 FASTA and annotation cache (not version controlled)
@@ -71,7 +71,7 @@ Both notebooks start with `RUN_PREDICTIONS = False`, which loads the stored Alph
 
 ## Example use
 
-The dual enhancer CRISPRi screen data in `data/raw/` (enhancer coordinates and measured single-enhancer and pairwise interaction coefficients) were provided by Julia R. Bauman, Steinmetz Lab, Department of Genetics, Stanford University.
+The dual enhancer CRISPRi screen data that the analysis was developed on (enhancer coordinates and measured single-enhancer and pairwise interaction coefficients; not distributed, `data/raw/` holds dummy examples) were provided by Julia R. Bauman, Steinmetz Lab, Department of Genetics, Stanford University.
 
 ### Enhancer element interactions
 

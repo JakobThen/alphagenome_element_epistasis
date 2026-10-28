@@ -22,6 +22,8 @@ The same names must be used in every file below, because the tables are joined o
 
 ## `raw/`: elements and measured coefficients
 
+`raw/` ships with small dummy files (3 genes with 3 elements each, invented coefficients, approximate coordinates that are not real regulatory elements) in every format described below. Replace them with your own elements and measurements. `processed/` starts empty and is filled by the pipeline.
+
 ### `enhancers.bed` (required)
 
 Tab-separated, no header, one row per element, 0-based half-open coordinates on hg38. All elements must have the same length, because the dinucleotide shuffles are stacked into one tensor. The motif notebook assumes 313 bp (`ENH_LEN`); change that constant if yours differ. Each gene's elements and gene body must fit inside one 1 Mb prediction window, which notebook 01 asserts.
